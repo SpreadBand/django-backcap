@@ -1,0 +1,292 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-09-27 12:14+0200\n"
+"PO-Revision-Date: 2010-09-27 12:14\n"
+"Last-Translator: Guillaume Libersat <guillaume@spreadband.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.5.6\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: management.py:10 templates/backcap/feedback_list.html:74
+msgid "New feedback"
+msgstr "Nouveau feedback"
+
+#: management.py:10
+msgid "A new feedback was submitted"
+msgstr "Un nouveau feedback a été envoyé"
+
+#: management.py:11
+msgid "Feedback updated"
+msgstr "Feedbacks mis à jour"
+
+#: management.py:11
+msgid "A feedback was updated"
+msgstr "Un feedback a été mis à jour"
+
+#: models.py:17
+msgid "Question"
+msgstr "Question"
+
+#: models.py:18
+msgid "Problem"
+msgstr "Problème"
+
+#: models.py:19
+msgid "Idea"
+msgstr "Idée"
+
+#: models.py:23
+msgid "New (unreviewed)"
+msgstr "Nouveau"
+
+#: models.py:24
+msgid "Valid"
+msgstr "Valide"
+
+#: models.py:25
+msgid "Need more information"
+msgstr "Besoin de plus d'informations"
+
+#: models.py:26
+msgid "Won't Fix"
+msgstr "Ne sera pas corrigé"
+
+#: models.py:27
+msgid "Invalid"
+msgstr "Invalide"
+
+#: models.py:28
+msgid "Assigned"
+msgstr "Attribué"
+
+#: models.py:29
+msgid "Duplicate"
+msgstr "Doublon"
+
+#: models.py:30
+msgid "Re-opened"
+msgstr "Ré-ouvert"
+
+#: models.py:31
+msgid "Closed"
+msgstr "Fermé"
+
+#: models.py:40
+msgid "Referer"
+msgstr "Référant"
+
+#: models.py:45
+msgid "Kind"
+msgstr "Genre"
+
+#: models.py:47
+msgid "Title"
+msgstr "Titre"
+
+#: models.py:49
+msgid "Text"
+msgstr "Texte"
+
+#: models.py:50
+msgid "Description of the feedback"
+msgstr "Description du feedback"
+
+#: models.py:53
+msgid "Status"
+msgstr "État"
+
+#: models.py:58 templates/backcap/feedback_list.html:122
+msgid "Assigned to"
+msgstr "Attribué à"
+
+#: models.py:65
+msgid "Duplicate of"
+msgstr "Doublon de"
+
+#: views.py:35
+msgid "Thanks for you feedback !"
+msgstr "Merci pour votre feedback !"
+
+#: views.py:146
+msgid "The users have been successfully notified"
+msgstr "Les utilisateurs ont été notifiés"
+
+#: templates/backcap/feedback_detail.html:23
+msgid "This issue is closed."
+msgstr "Ce feedback est fermé."
+
+#: templates/backcap/feedback_detail.html:63
+#, python-format
+msgid ""
+"\n"
+"\t\t      Posted %(since)s ago by\n"
+"\t\t    "
+msgstr ""
+"\n"
+"Posté il y a %(since)s par"
+
+#: templates/backcap/feedback_detail.html:83
+msgid "is working on this. Poke him if you think it's taking too long !"
+msgstr "travaille dessus. Relancez le si vous pensez que ça prend trop de temps !"
+
+#: templates/backcap/feedback_detail.html:91
+msgid "This issue is a duplicate of"
+msgstr "Ce problème est un double de"
+
+#: templates/backcap/feedback_detail.html:92
+msgid "Please don't comment on this issue anymore."
+msgstr "Merci de ne plus commenter ce feedback."
+
+#: templates/backcap/feedback_detail.html:98
+msgid "Description:"
+msgstr "Description :"
+
+#: templates/backcap/feedback_detail.html:102
+msgid "Comments"
+msgstr "Commentaires"
+
+#: templates/backcap/feedback_detail.html:111
+msgid "Post a new comment"
+msgstr "Poster un nouveau commentaire"
+
+#: templates/backcap/feedback_detail.html:120
+msgid "Post"
+msgstr "Poster"
+
+#: templates/backcap/feedback_detail.html:124
+msgid "Comments closed."
+msgstr "Commentaires fermés."
+
+#: templates/backcap/feedback_detail.html:129
+msgid "This issue is"
+msgstr "Cette question est"
+
+#: templates/backcap/feedback_detail.html:130
+msgid "Close issue"
+msgstr "Fermer le feedback"
+
+#: templates/backcap/feedback_detail.html:132
+msgid "Reported from:"
+msgstr "Signalé depuis :"
+
+#: templates/backcap/feedback_detail.html:136
+msgid "Edit"
+msgstr "Éditer"
+
+#: templates/backcap/feedback_detail.html:137
+msgid "Ping observers"
+msgstr "Notifier les observateurs"
+
+#: templates/backcap/feedback_detail.html:142
+#: templates/backcap/feedback_tab.html:41
+msgid "See all feedbacks"
+msgstr "Voir tous les feedbacks"
+
+#: templates/backcap/feedback_list.html:8
+msgid "Help Center"
+msgstr "Centre d'aide"
+
+#: templates/backcap/feedback_list.html:56
+msgid "Feedbacks"
+msgstr "Feedbacks"
+
+#: templates/backcap/feedback_list.html:62
+msgid "This is all the feedbacks submitted by you, the users. Thanks for that."
+msgstr "Voici tous les feedbacks des utilisateurs. Merci à tous !"
+
+#: templates/backcap/feedback_list.html:66
+msgid "If you think one of these entries is important for you, then <strong>click on the '+' button</strong>. If you disagree or think this is not important at all, then <strong>click on '-'</strong>."
+msgstr "Si vous pensez que l'une de ces entrées est importante pour vous, <strong> cliquez sur le bouton '+'</strong>. Si vous n'êtes pas d'accord et si vous pensez que ce n'est pas important du tout,  <strong>cliquez sur '-'</strong>."
+
+#: templates/backcap/feedback_list.html:70
+msgid "The <strong>highest the score</strong> an issue will get, the <strong>earlier we'll work on</strong> it."
+msgstr "<strong>Plus la note d'un feedback sera élevée</strong>, <strong>plus tôt</strong> nous travaillerons sur la résolution de celui-ci."
+
+#: templates/backcap/feedback_list.html:97
+#: templates/backcap/feedback_list.html:107
+msgid "Clear my vote"
+msgstr "Annuler mon vote"
+
+#: templates/backcap/feedback_list.html:97
+msgid "Vote for"
+msgstr "Voter pour"
+
+#: templates/backcap/feedback_list.html:107
+msgid "Vote against"
+msgstr "Voter contre"
+
+#: templates/backcap/feedback_list.html:127
+#, python-format
+msgid ""
+"\n"
+"\t    Posted %(since)s ago by\n"
+"\t  "
+msgstr ""
+"\n"
+"Posté il y a %(since)s par"
+
+#: templates/backcap/feedback_list.html:139
+msgid "previous"
+msgstr "précédent"
+
+#: templates/backcap/feedback_list.html:155
+msgid "next"
+msgstr "suivant"
+
+#: templates/backcap/feedback_list.html:159
+msgid "Display"
+msgstr "Afficher"
+
+#: templates/backcap/feedback_list.html:162
+msgid "All"
+msgstr "Tous"
+
+#: templates/backcap/feedback_list.html:163
+msgid "Questions"
+msgstr "Questions"
+
+#: templates/backcap/feedback_list.html:164
+msgid "Problems"
+msgstr "Problèmes"
+
+#: templates/backcap/feedback_list.html:165
+msgid "Ideas"
+msgstr "Idées"
+
+#: templates/backcap/feedback_list.html:168
+msgid "Order by"
+msgstr "Trier par"
+
+#: templates/backcap/feedback_list.html:170
+msgid "Score"
+msgstr "Score"
+
+#: templates/backcap/feedback_list.html:171
+msgid "Newest"
+msgstr "Plus récents"
+
+#: templates/backcap/feedback_new.html:4
+msgid "Leave feedback"
+msgstr "Laisser un feedback"
+
+#: templates/backcap/feedback_tab.html:32
+msgid "Suggestions"
+msgstr "Suggestions"
+
+#: templates/backcap/feedback_tab.html:34
+msgid "Start typing a title"
+msgstr "Commencez à saisir un titre"
+
+#~ msgid "New"
+#~ msgstr "Nouveau"

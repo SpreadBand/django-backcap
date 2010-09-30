@@ -1,0 +1,10 @@
+A new {{ feedback.get_kind_display }} was submitted by {{ feedback.user }}:
+
+Title: {{ feedback.title }}
+
+{{ feedback.text }}
+
+(It was reported from: http://{{current_site}}{{ feedback.referer }})
+
+You can see it by clicking on the following link:
+http://{{ current_site}}{{ feedback.get_absolute_url }}

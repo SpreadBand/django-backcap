@@ -1,0 +1,7 @@
+An update concerning a feedback you're interested in was submitted.
+
+Feedback: {{ feedback.title }}
+
+You may be interested in checking what have changed by clicking on the
+following link:
+http://{{ current_site}}{{ feedback.get_absolute_url }}
