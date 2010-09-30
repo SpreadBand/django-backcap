@@ -23,10 +23,12 @@ Requirements
 ============
 
 Backcap requires:
+
 - django-notifications
 - django-voting
 
 Backcap can make use of:
+
 - haystack (for feedback indexing)
 - south
 
