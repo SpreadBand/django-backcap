@@ -3,7 +3,6 @@ from distutils.core import setup
 
 setup(
     name = "django-backcap",
-    version = __import__("backcap").__version__,
     author = "Guillaume Libersat",
     author_email = "guillaume@spreadband.com",
     description = "Support module for community driven django websites.",
