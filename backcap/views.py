@@ -21,10 +21,12 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response, get_object_or_404
-from django.views.generic.create_update import update_object
-from django.views.generic.list_detail import object_list, object_detail
+from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_GET
+from django.views.generic.create_update import update_object
+from django.views.generic.list_detail import object_list, object_detail
+
 
 from haystack.query import SearchQuerySet
 import notification.models as notification
@@ -50,7 +52,7 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
             feedback.user = request.user
             feedback.save()
 
-            messages.success(request, _("Thanks for you feedback !"))
+            messages.success(request, _("Thanks for your feedback !"))
 
             staff = User.objects.filter(is_staff=True)
             notification.send(staff, "feedback_new", {'feedback': feedback})
@@ -62,6 +64,7 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
 
     return render_to_response(template_name=template_name,
                               dictionary={'feedback_form': feedback_form},
+                              context_instance=RequestContext(request)
                               )
 
 # XXX: Security

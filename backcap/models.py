@@ -65,7 +65,8 @@ class Feedback(models.Model):
     title = CharField(verbose_name=_('Title'),
                       max_length=255)
     text = TextField(verbose_name=_('Text'),
-                     help_text=_("Description of the feedback"))
+                     help_text=_("Description of the feedback"),
+                     blank=True)
 
     # State
     status = CharField(verbose_name=_('Status'),
