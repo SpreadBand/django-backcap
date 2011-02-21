@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-09-27 12:14+0200\n"
-"PO-Revision-Date: 2010-09-27 12:14\n"
-"Last-Translator: Guillaume Libersat <guillaume@spreadband.com>\n"
+"PO-Revision-Date: 2011-02-21 18:14\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,19 +20,19 @@ msgstr ""
 
 #: management.py:10 templates/backcap/feedback_list.html:74
 msgid "New feedback"
-msgstr "Nouveau feedback"
+msgstr "Nouveau commentaire"
 
 #: management.py:10
 msgid "A new feedback was submitted"
-msgstr "Un nouveau feedback a été envoyé"
+msgstr "Un nouveau commentaire a été envoyé"
 
 #: management.py:11
 msgid "Feedback updated"
-msgstr "Feedbacks mis à jour"
+msgstr "Commentaires mis à jour"
 
 #: management.py:11
 msgid "A feedback was updated"
-msgstr "Un feedback a été mis à jour"
+msgstr "Un commentaire a été mis à jour"
 
 #: models.py:17
 msgid "Question"
@@ -100,7 +100,7 @@ msgstr "Texte"
 
 #: models.py:50
 msgid "Description of the feedback"
-msgstr "Description du feedback"
+msgstr "Description du commentaire"
 
 #: models.py:53
 msgid "Status"
@@ -116,7 +116,7 @@ msgstr "Doublon de"
 
 #: views.py:35
 msgid "Thanks for you feedback !"
-msgstr "Merci pour votre feedback !"
+msgstr "Merci pour votre commentaire !"
 
 #: views.py:146
 msgid "The users have been successfully notified"
@@ -124,7 +124,7 @@ msgstr "Les utilisateurs ont été notifiés"
 
 #: templates/backcap/feedback_detail.html:23
 msgid "This issue is closed."
-msgstr "Ce feedback est fermé."
+msgstr "Ce commentaire est fermé."
 
 #: templates/backcap/feedback_detail.html:63
 #, python-format
@@ -146,7 +146,7 @@ msgstr "Ce problème est un double de"
 
 #: templates/backcap/feedback_detail.html:92
 msgid "Please don't comment on this issue anymore."
-msgstr "Merci de ne plus commenter ce feedback."
+msgstr "Merci de ne plus commenter ce commentaire."
 
 #: templates/backcap/feedback_detail.html:98
 msgid "Description:"
@@ -174,7 +174,7 @@ msgstr "Cette question est"
 
 #: templates/backcap/feedback_detail.html:130
 msgid "Close issue"
-msgstr "Fermer le feedback"
+msgstr "Fermer le commentaire"
 
 #: templates/backcap/feedback_detail.html:132
 msgid "Reported from:"
@@ -191,7 +191,7 @@ msgstr "Notifier les observateurs"
 #: templates/backcap/feedback_detail.html:142
 #: templates/backcap/feedback_tab.html:41
 msgid "See all feedbacks"
-msgstr "Voir tous les feedbacks"
+msgstr "Voir tous les commentaires"
 
 #: templates/backcap/feedback_list.html:8
 msgid "Help Center"
@@ -199,11 +199,11 @@ msgstr "Centre d'aide"
 
 #: templates/backcap/feedback_list.html:56
 msgid "Feedbacks"
-msgstr "Feedbacks"
+msgstr "Commentaires"
 
 #: templates/backcap/feedback_list.html:62
 msgid "This is all the feedbacks submitted by you, the users. Thanks for that."
-msgstr "Voici tous les feedbacks des utilisateurs. Merci à tous !"
+msgstr "Voici tous les commentaires des utilisateurs. Merci à tous !"
 
 #: templates/backcap/feedback_list.html:66
 msgid "If you think one of these entries is important for you, then <strong>click on the '+' button</strong>. If you disagree or think this is not important at all, then <strong>click on '-'</strong>."
@@ -211,7 +211,7 @@ msgstr "Si vous pensez que l'une de ces entrées est importante pour vous, <stro
 
 #: templates/backcap/feedback_list.html:70
 msgid "The <strong>highest the score</strong> an issue will get, the <strong>earlier we'll work on</strong> it."
-msgstr "<strong>Plus la note d'un feedback sera élevée</strong>, <strong>plus tôt</strong> nous travaillerons sur la résolution de celui-ci."
+msgstr "<strong>Plus la note d'un commentaire sera élevée</strong>, <strong>plus tôt</strong> nous travaillerons sur la résolution de celui-ci."
 
 #: templates/backcap/feedback_list.html:97
 #: templates/backcap/feedback_list.html:107
@@ -278,7 +278,7 @@ msgstr "Plus récents"
 
 #: templates/backcap/feedback_new.html:4
 msgid "Leave feedback"
-msgstr "Laisser un feedback"
+msgstr "Laisser un commentaire"
 
 #: templates/backcap/feedback_tab.html:32
 msgid "Suggestions"
