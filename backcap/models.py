@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 # Backcap, a support module for community-driven django websites
@@ -97,7 +98,7 @@ class Feedback(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('backcap:feedback-detail', (), {'feedback_id': self.id})
+        return ('feedback-detail', (), {'feedback_id': self.id})
     
 
 ## Signal routing
