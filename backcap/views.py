@@ -45,7 +45,7 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
     referer = request.GET.get("referer", None)
 
     if request.method == 'POST':
-        feedback_form = FeedbackNewForm(request.POST)
+        feedback_form = FeedbackNewForm(request.POST, prefix='backcap')
 
         if feedback_form.is_valid():
             feedback = feedback_form.save(commit=False)
@@ -60,7 +60,7 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
 
             return redirect(feedback)
     else:
-        feedback_form = FeedbackNewForm(initial={'referer': referer})
+        feedback_form = FeedbackNewForm(initial={'referer': referer}, prefix='backcap')
 
     return render_to_response(template_name=template_name,
                               dictionary={'feedback_form': feedback_form},
