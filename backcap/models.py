@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 # Backcap, a support module for community-driven django websites
@@ -24,8 +23,10 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 
+from notification.models import ObservedItem
 from voting.models import Vote
 
+from .utils import subscribe_user
 from .signals import feedback_updated
 
 class Feedback(models.Model):
@@ -92,6 +93,9 @@ class Feedback(models.Model):
                                     content_type_field="content_type")
 
 
+    def followers(self):
+        return [item.user for item in ObservedItem.objects.all_for(self, 'feedback_updated')]
+
     def __unicode__(self):
         return '%s - %s' % (self.kind, self.title)
 
@@ -107,12 +111,17 @@ from django.contrib.comments.signals import comment_was_posted
 from annoying.decorators import signals
 import notification.models as notification
 
-@signals(feedback_updated)
+@signals(feedback_updated
 def on_feedback_updated(sender, *args, **kwargs):
     notification.send_observation_notices_for(sender, 'feedback_updated', {'feedback': sender})
 
 @signals(comment_was_posted)
 def on_comment_posted(sender, comment, request, *args, **kwargs):
+    # Send the 'feedback_updated' signal
     feedback_ctype = ContentType.objects.get_for_model(Feedback)
     if comment.content_type == feedback_ctype:
         feedback_updated.send(sender=comment.content_object)
+
+    # Subscribe the commenting user to this feedback
+    if not request.user.is_anonymous():
+        subscribe_user(request.user, comment.content_object)

@@ -35,6 +35,10 @@ urlpatterns += patterns('',
     url(r'^(?P<feedback_id>\d+)/close$', views.feedback_close, name='feedback-close'),
     url(r'^(?P<feedback_id>\d+)/ping$', views.feedback_ping_observers, name='feedback-ping-observers'),
 
+    # Following
+    url(r'^(?P<feedback_id>\d+)/follow$', views.feedback_follow, name='feedback-follow'),
+    url(r'^(?P<feedback_id>\d+)/unfollow$', views.feedback_unfollow, name='feedback-unfollow'),
+
     url(r'^feedback-tab$', views.feedback_tab, name='feedback-tab'),
 
     # Votes

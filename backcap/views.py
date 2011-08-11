@@ -23,7 +23,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic.create_update import update_object
 from django.views.generic.list_detail import object_list, object_detail
 
@@ -36,6 +36,7 @@ from .models import Feedback
 from .forms import FeedbackNewForm, FeedbackEditForm
 from .signals import feedback_updated as sig_feedback_updated
 from .sql import SumWithDefault
+from .utils import subscribe_user, unsubscribe_user
 
 @login_required
 def feedback_new(request, template_name='backcap/feedback_new.html'):
@@ -56,7 +57,7 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
 
             staff = User.objects.filter(is_staff=True)
             notification.send(staff, "feedback_new", {'feedback': feedback})
-            notification.observe(feedback, request.user, "feedback_updated", "feedback_updated")
+            subscribe_user(request.user, feedback)
 
             return redirect(feedback)
     else:
@@ -67,7 +68,7 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
                               context_instance=RequestContext(request)
                               )
 
-# XXX: Security
+# XXX: Security problem: any user can update a feedback atm.
 @login_required
 def feedback_update(request, feedback_id):
     """
@@ -134,11 +135,10 @@ def feedback_vote(request, feedback_id, direction):
     feedback = get_object_or_404(Feedback, id=feedback_id)
 
     # Auto (un)subscribe user if he/she's interested in this issue or not
-    is_observing = notification.is_observing(feedback, request.user, "feedback_updated")
-    if direction == 'up' and not is_observing:
-        notification.observe(feedback, request.user, "feedback_updated", "feedback_updated")
-    elif direction in ('down', 'clear') and is_observing:
-        notification.stop_observing(feedback, request.user, "feedback_updated")
+    if direction == 'up':
+        subscribe_user(request.user, feedback)
+    elif direction in ('down', 'clear'):
+        unsubscribe_user(request.user, feedback)
 
     return vote_on_object(request,
                           model=Feedback,
@@ -186,3 +186,27 @@ def feedback_search(request, limit=10):
                               dictionary={'results': results,
                                           'query': query},
                               )
+
+@login_required
+@require_POST
+def feedback_follow(request, feedback_id):
+    feedback = get_object_or_404(Feedback, pk=feedback_id)
+
+    subscribe_user(request.user, feedback)
+
+    messages.success(request, _("You are now following this feedback"))
+
+    return redirect(feedback)
+
+
+@login_required
+@require_POST
+def feedback_unfollow(request, feedback_id):
+    feedback = get_object_or_404(Feedback, pk=feedback_id)
+
+    unsubscribe_user(request.user, feedback)
+
+    messages.success(request, _("You are no more following this feedback"))
+
+    return redirect(feedback)
+    
