@@ -1,0 +1,24 @@
+{% extends "admin/index.html" %}
+{% load i18n backcap_tags %}
+{% block extrahead %}
+    <style type='text/css'>
+    #feedback {float:right;margin-right:-38em;width:18em;position:relative;}
+    </style>
+    {{ block.super }}
+{% endblock %}
+{% block sidebar %}
+    {{ block.super }}
+    <div id="feedback">
+        <div class="module" id="feedback-module">
+            <h2>{% trans 'Feedbacks' %}</h2>
+            <ul class='actionlist'>
+                {% get_feedbacks %}
+                {% for feedback in feedbacks|slice:"0:10" %}
+                    <li>{{ feedback.get_kind_display }}: <a href="{{ feedback.get_absolute_url }}">{{ feedback.title|capfirst }}</a> from {{ feedback.user.username|capfirst }}</a> &mdash; {{ feedback.created_on|timesince }} ago</li>
+		    <hr/>
+                {% endfor %}
+            </ul>
+            <p><a href='{% url admin:backcap_feedback_changelist %}'>View all feedback</a></p>
+        </div>
+    </div>
+{% endblock %}

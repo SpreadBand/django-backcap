@@ -111,7 +111,7 @@ from django.contrib.comments.signals import comment_was_posted
 from annoying.decorators import signals
 import notification.models as notification
 
-@signals(feedback_updated
+@signals(feedback_updated)
 def on_feedback_updated(sender, *args, **kwargs):
     notification.send_observation_notices_for(sender, 'feedback_updated', {'feedback': sender})
 
