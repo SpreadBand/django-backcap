@@ -19,6 +19,26 @@ In fact, that's something like an Help Center. And this is why we have
 developped it, to provides a nice help center for the SpreadBand
 website.
 
+Features
+========
+
+For users:
+- Post a feedback (from a plain page or a tab) -- question, idea, problem
+- Browse and sort feedbacks
+- Vote for or against a feedback
+- Comment on a feedback
+- Follow a feedback
+
+For the staff:
+- Assign a feedback to someone
+- Set a state (Valid, Won't Fix, ...)
+- Close, reopen, mark as duplicate, ...
+
+
+Notifications are handled using django-notification and can be indexed
+by haystack.
+
+
 Requirements
 ============
 
@@ -41,13 +61,14 @@ Installation
 
 	INSTALLED_APPS = (
 	    # ...
-	    'faq',
+	    'backcap',
 	    # ...
 	)
 
-3. Run syncdb
+3. Run syncdb and migrations
 
         $ ./manage.py syncdb
+	$ ./manage migrate backcap
 
 4. Write templates
 
