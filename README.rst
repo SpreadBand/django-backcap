@@ -23,6 +23,7 @@ Features
 ========
 
 For users:
+
 - Post a feedback (from a plain page or a tab) -- question, idea, problem
 - Browse and sort feedbacks
 - Vote for or against a feedback
@@ -30,6 +31,7 @@ For users:
 - Follow a feedback
 
 For the staff:
+
 - Assign a feedback to someone
 - Set a state (Valid, Won't Fix, ...)
 - Close, reopen, mark as duplicate, ...
