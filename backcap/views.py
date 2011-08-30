@@ -84,7 +84,7 @@ def feedback_list(request, qtype='all'):
     """
     Display all the feedbacks
     """
-    queryset = Feedback.objects.exclude(status__in=('C', 'D', 'I')).annotate(score=SumWithDefault('votes__vote', default=0))
+    queryset = Feedback.objects.exclude(status__in=('C', 'D', 'I', 'W')).annotate(score=SumWithDefault('votes__vote', default=0))
 
     order = request.GET.get('order', 'score')
     if order == 'newest':
