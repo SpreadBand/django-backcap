@@ -92,6 +92,16 @@ def feedback_list(request, qtype='all'):
     else:
         queryset = queryset.order_by('-score', 'modified_on', 'kind')
 
+    # Feedbacks assigned to the user
+    mine = request.GET.get('mine', False)
+    if mine:
+        queryset = queryset.filter(assigned_to=request.user)
+
+    # Feedbacks followed by the user
+    followed = request.GET.get('followed', False)
+    if followed:
+        queryset = queryset.filter(followers__user=request.user)
+
 
     if qtype in [choice[0] for choice in Feedback.KIND_CHOICES]:
         queryset = queryset.filter(kind=qtype)

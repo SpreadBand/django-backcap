@@ -93,8 +93,10 @@ class Feedback(models.Model):
                                     content_type_field="content_type")
 
 
-    def followers(self):
+    def following_users(self):
         return [item.user for item in ObservedItem.objects.all_for(self, 'feedback_updated')]
+
+    followers = generic.GenericRelation(ObservedItem)
 
     def __unicode__(self):
         return '%s - %s' % (self.kind, self.title)
