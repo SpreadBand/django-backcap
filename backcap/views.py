@@ -36,6 +36,7 @@ from .models import Feedback
 from .forms import FeedbackNewForm, FeedbackEditForm
 from .signals import feedback_updated as sig_feedback_updated
 from .sql import SumWithDefault
+from .settings import BACKCAP_NOTIFIED_USERS, BACKCAP_NOTIFY_WHOLE_STAFF
 from .utils import subscribe_user, unsubscribe_user
 
 @login_required
@@ -55,8 +56,18 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
 
             messages.success(request, _("Thanks for your feedback !"))
 
-            staff = User.objects.filter(is_staff=True)
-            notification.send(staff, "feedback_new", {'feedback': feedback})
+            users_to_notify = User.objects.none()
+            # Add the specified users
+            if BACKCAP_NOTIFIED_USERS:
+                users_to_notify |= User.objects.filter(username__in=BACKCAP_NOTIFIED_USERS)
+
+            # Add the whole staff if enabled
+            if BACKCAP_NOTIFY_WHOLE_STAFF:
+                users_to_notify |= User.objects.filter(is_staff=True)
+
+            # Send notification
+            notification.send(users_to_notify, "feedback_new", {'feedback': feedback})
+
             subscribe_user(request.user, feedback)
 
             return redirect(feedback)
