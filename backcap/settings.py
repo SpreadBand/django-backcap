@@ -26,3 +26,7 @@ BACKCAP_NOTIFY_WHOLE_STAFF = getattr(settings,
 BACKCAP_NOTIFIED_USERS = getattr(settings,
                                  'BACKCAP_NOTIFIED_USERS',
                                  None)
+
+BACKCAP_INDEX_FEEDBACKS = getattr(settings,
+                                  'BACKCAP_INDEX_FEEDBACKS',
+                                  True)
