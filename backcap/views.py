@@ -27,8 +27,11 @@ from django.views.decorators.http import require_GET, require_POST
 from django.views.generic.create_update import update_object
 from django.views.generic.list_detail import object_list, object_detail
 
+from backcap.settings import BACKCAP_INDEX_FEEDBACKS
 
-from haystack.query import SearchQuerySet
+if BACKCAP_INDEX_FEEDBACKS:
+    from haystack.query import SearchQuerySet
+
 import notification.models as notification
 from voting.views import vote_on_object
 
