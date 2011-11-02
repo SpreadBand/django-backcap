@@ -42,7 +42,7 @@ urlpatterns += patterns('',
     url(r'^feedback-tab/$', views.feedback_tab, name='feedback-tab'),
 
     # Votes
-    url(r'^(?P<feedback_id>\d+)/(?P<direction>up|down|clear)vote/?$', views.feedback_vote, name='feedback-vote'),
+    url(r'^(?P<feedback_id>\d+)/(?P<direction>up|down|clear)vote/$', views.feedback_vote, name='feedback-vote'),
 
 )
 
