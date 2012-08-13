@@ -16,19 +16,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from haystack.indexes import RealTimeSearchIndex, CharField
-from haystack import site
+from haystack import indexes
 
 from .models import Feedback
 
-class FeedbackIndex(RealTimeSearchIndex):
-    text = CharField(document=True, use_template=True)
+class FeedbackIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
 
-    def get_queryset(self):
-        return Feedback.objects.all()
+    def get_model(self):
+        return Feedback
 
-
-site.register(Feedback, FeedbackIndex)
+    def index_queryset(self):
+        """
+        Used when the entire index for model is updated.
+        """
+        return self.get_model().objects.all()
 
 
 
