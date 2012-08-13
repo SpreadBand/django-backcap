@@ -20,7 +20,7 @@ from haystack import indexes
 
 from .models import Feedback
 
-class FeedbackIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
+class FeedbackIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
 
     def get_model(self):
