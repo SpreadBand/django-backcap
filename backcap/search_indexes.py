@@ -26,7 +26,7 @@ class FeedbackIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return Feedback
 
-    def index_queryset(self):
+    def index_queryset(self, using=None):
         """
         Used when the entire index for model is updated.
         """
