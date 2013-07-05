@@ -29,4 +29,4 @@ BACKCAP_NOTIFIED_USERS = getattr(settings,
 
 BACKCAP_INDEX_FEEDBACKS = getattr(settings,
                                   'BACKCAP_INDEX_FEEDBACKS',
-                                  True)
+                                  False)

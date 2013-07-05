@@ -12,11 +12,11 @@
         <fieldset class="module aligned">
             <h2>{{ feedback.get_type_display }} from {{ feedback.user|title }} &mdash; {{ feedback.time|timesince }} ago</h2>
             <p>{{ feedback.message }}</p>
-            <h3>Actions</h3>
+            <h3>{% trans "Actions" %}</h3>
             <ul>
-                <li><a href='mailto:{{ feedback.user.email }}'>E-mail user</a></li>
-                <li><a href='../../{{ feedback.id }}/'>Edit Feedback</a></li>
-                <li><a href='../../{{ feedback.id }}/delete/'>Delete Feedback</a></li>
+                <li><a href='mailto:{{ feedback.user.email }}'>{% trans "E-mail user" %}</a></li>
+                <li><a href='../../{{ feedback.id }}/'>{% trans "Edit Feedback" %}</a></li>
+                <li><a href='../../{{ feedback.id }}/delete/'>{% trans "Delete Feedback" %}</a></li>
             </ul>
         </fieldset>
     </div>

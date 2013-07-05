@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <h2>{% trans "Feedback list" %}</h2>
+
+  <div class="row">
+    <div class="span12">
+      {% for feedback in feedbacks %}
+      <div class="row">
+	<!-- score -->
+	<div class="span1">
+	  {{ feedback.votes.count }}
+	</div>
+	<!-- description -->
+	<div class="span9">
+	  <h5><a href="{{ feedback.get_absolute_url }}">{{ feedback.title }}</a></h5>
+	</div>
+	<!-- state -->
+	<div class="span2">
+	  <span class="label">{{ feedback.get_status_display }}</span>
+	</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

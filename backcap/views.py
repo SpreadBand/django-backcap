@@ -23,9 +23,11 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
+from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_GET, require_POST
-from django.views.generic.create_update import update_object
-from django.views.generic.list_detail import object_list, object_detail
+from django.views.generic.edit import UpdateView
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 from backcap.settings import BACKCAP_INDEX_FEEDBACKS
 
@@ -83,63 +85,72 @@ def feedback_new(request, template_name='backcap/feedback_new.html'):
                               )
 
 # XXX: Security problem: any user can update a feedback atm.
-@login_required
-def feedback_update(request, feedback_id):
+class FeedbackUpdateView(UpdateView):
     """
     Edit a single feedback
     """
-    return update_object(request,
-                         form_class=FeedbackEditForm,
-                         object_id=feedback_id,
-                         template_name='backcap/feedback_update.html',
-                         )
+    model = Feedback
+    form_class = FeedbackEditForm
+    pk_url_kwarg = 'feedback_id'
+    template_name='backcap/feedback_update.html'    
 
-def feedback_list(request, qtype='all'):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(FeedbackUpdateView, self).dispatch(request, *args, **kwargs)
+
+
+
+class FeedbackListView(ListView):
     """
     Display all the feedbacks
     """
-    queryset = Feedback.objects.exclude(status__in=('C', 'D', 'I', 'W')).annotate(score=SumWithDefault('votes__vote', default=0))
+    template_name = 'backcap/feedback_list.html'
+    context_object_name = 'feedbacks'
+    paginate_by = 15
+    
+    def get_queryset(self, qtype='all', *args, **kwargs):
+        queryset = Feedback.objects.exclude(status__in=('C', 'D', 'I', 'W')).annotate(score=SumWithDefault('votes__vote', default=0))
 
-    order = request.GET.get('order', 'score')
-    if order == 'newest':
-        quersyet = queryset.order_by('modified_on', 'kind', '-score')
-    else:
-        queryset = queryset.order_by('-score', 'modified_on', 'kind')
-
-    if request.user.is_authenticated():
-        # Feedbacks assigned to the user
-        mine = request.GET.get('mine', False)
-        if mine:
-            queryset = queryset.filter(assigned_to=request.user)
+        self.order = self.request.GET.get('order', 'score')
+        if self.order == 'newest':
+            queryset = queryset.order_by('modified_on', 'kind', '-score')
+        else:
+            queryset = queryset.order_by('-score', 'modified_on', 'kind')
             
-        # Feedbacks followed by the user
-        followed = request.GET.get('followed', False)
-        if followed:
-            queryset = queryset.filter(followers__user=request.user)
+        if self.request.user.is_authenticated():
+            # Feedbacks assigned to the user
+            mine = self.request.GET.get('mine', False)
+            if mine:
+                queryset = queryset.filter(assigned_to=self.request.user)
+                
+            # Feedbacks followed by the user
+            followed = self.request.GET.get('followed', False)
+            if followed:
+                queryset = queryset.filter(followers__user=self.request.user)
 
+        self.qtype = qtype                
+        if qtype in [choice[0] for choice in Feedback.KIND_CHOICES]:
+            queryset = queryset.filter(kind=qtype)
+            
+        return queryset
 
-    if qtype in [choice[0] for choice in Feedback.KIND_CHOICES]:
-        queryset = queryset.filter(kind=qtype)
+    def get_context_data(self, *args, **kwargs):
+        context = super(FeedbackListView, self).get_context_data(*args, **kwargs)
+        
+        context['qtype'] = self.qtype
+        context['order'] = self.order
+        
+        return context
 
-    return object_list(request,
-                       queryset=queryset,
-                       template_name='backcap/feedback_list.html',
-                       template_object_name='feedback',
-                       paginate_by=15,
-                       extra_context={'qtype': qtype,
-                                      'order': order},
-                       )
-
-def feedback_detail(request, feedback_id):
+class FeedbackDetailView(DetailView):
     """
     Shows a single feedback
     """
-    return object_detail(request,
-                         queryset=Feedback.objects.all(),
-                         object_id=feedback_id,
-                         template_object_name='feedback',
-                         template_name='backcap/feedback_detail.html',
-                         )
+    model = Feedback
+    pk_url_kwarg = 'feedback_id'
+    template_name = 'backcap/feedback_detail.html'
+    context_object_name = 'feedback'
+    
 
 # XXX Security
 @login_required
@@ -179,17 +190,17 @@ def feedback_ping_observers(request, feedback_id):
     """
     Ping users that are observing this feedback
     """
-    if not request.user.is_superuser:
+    if not request.user.is_staff:
         return HttpResponseForbidden()
 
     feedback = get_object_or_404(Feedback, id=feedback_id)
 
-    notification.send([feedback.user],
+    notification.send(feedback.followers.all(),
                       "feedback_updated",
                       {'feedback': feedback},
                       )
 
-    messages.success(request, _("The users have been successfully notified"))
+    messages.success(request, _("The followers have been successfully notified"))
 
     return redirect(feedback)
     

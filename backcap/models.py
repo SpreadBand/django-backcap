@@ -23,7 +23,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 
-from notification.models import ObservedItem
 from voting.models import Vote
 
 from .utils import subscribe_user
@@ -56,7 +55,7 @@ class Feedback(models.Model):
     modified_on = DateTimeField(auto_now=True)
 
     # Who and what
-    user = ForeignKey(User)
+    user = ForeignKey(User, related_name='feedbacks')
     referer = TextField(verbose_name=_('Referer'),
                         blank=True,
                         null=True)
@@ -92,11 +91,7 @@ class Feedback(models.Model):
                                     object_id_field="object_id",
                                     content_type_field="content_type")
 
-
-    def following_users(self):
-        return [item.user for item in ObservedItem.objects.all_for(self, 'feedback_updated')]
-
-    followers = generic.GenericRelation(ObservedItem)
+    followers = models.ManyToManyField(User, related_name='followed_feedbacks')
 
     def __unicode__(self):
         return '%s - %s' % (self.kind, self.title)
@@ -110,14 +105,15 @@ class Feedback(models.Model):
 ## Signal routing
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.comments.signals import comment_was_posted
-from annoying.decorators import signals
+from django.dispatch import receiver
+
 import notification.models as notification
 
-@signals(feedback_updated)
+@receiver(feedback_updated)
 def on_feedback_updated(sender, *args, **kwargs):
-    notification.send_observation_notices_for(sender, 'feedback_updated', {'feedback': sender})
+    notification.send(sender.followers.all(), 'feedback_updated', {'feedback': sender})
 
-@signals(comment_was_posted)
+@receiver(comment_was_posted)
 def on_comment_posted(sender, comment, request, *args, **kwargs):
     # Send the 'feedback_updated' signal
     feedback_ctype = ContentType.objects.get_for_model(Feedback)

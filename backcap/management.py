@@ -17,16 +17,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.db.models.signals import post_syncdb
+from django.dispatch import receiver
 from django.utils.translation import ugettext_noop as _
 
 import notification.models as notification
+from notification.models import NoticeType
 
-from annoying.decorators import signals
-
-@signals(post_syncdb, sender=notification)
+@receiver(post_syncdb, sender=notification)
 def create_notice_types(app, created_models, verbosity, **kwargs):
-    notification.create_notice_type("feedback_new", _("New feedback"), _("A new feedback was submitted"))
-    notification.create_notice_type("feedback_updated", _("Feedback updated"), _("A feedback was updated"))
+    NoticeType.create("feedback_new", _("New feedback"), _("A new feedback was submitted"))
+    NoticeType.create("feedback_updated", _("Feedback updated"), _("A feedback was updated"))
 
     
 

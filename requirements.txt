@@ -1,0 +1,2 @@
+django-notification==1.0
+django-voting==0.2

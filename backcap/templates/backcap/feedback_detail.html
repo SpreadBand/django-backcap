@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <h2>{% trans "Feedback detail" %}</h2>
+  
+  <h3>{{ feedback.title }}</h3>
+
+  <p>{{ feedback.text }}</p>
+
+  <ul>
+    {% for follower in feedback.followers.all %}
+    <li>{{ follower }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'feedback-list' %}">{% trans "Feedback list" %}</a>
+
+</div>
+{% endblock %}
+
+
