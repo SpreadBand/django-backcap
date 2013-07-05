@@ -77,11 +77,11 @@ Installation
 
 3. Add the context processor::
 
-   TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
-                                  ...
-				  'backcap.context_processors.backcap_forms',
-				  ...
-				  )
+     TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+                                    ...
+				    'backcap.context_processors.backcap_forms',
+				    ...
+				    )
 
 4. Run syncdb and migrations::
 
