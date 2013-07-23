@@ -8,9 +8,6 @@ setup(
     long_description = open("README.rst").read(),
     license = "GPL v3",
     url = "http://github.com/SpreadBand/django-backcap",
-    packages = [
-        "backcap",
-    ],
     packages=find_packages(),
     include_package_data=True,
     install_requires=["django-notification==1.0",
