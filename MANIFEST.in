@@ -1,0 +1,2 @@
+include AUTHORS COPYING README.rst
+recursive-include backcap *.py *.html *.po
