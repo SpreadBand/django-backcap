@@ -1,5 +1,4 @@
-from distutils.core import setup
-
+from setuptools import setup, find_packages
 
 setup(
     name = "django-backcap",
@@ -9,15 +8,11 @@ setup(
     long_description = open("README.rst").read(),
     license = "GPL v3",
     url = "http://github.com/SpreadBand/django-backcap",
-    packages = [
-        "backcap",
-    ],
-    include_package_data = True,
-    package_data = {
-        'backcap': [
-            'locale/*/*/*',
-        ]
-    },
+    packages=find_packages(),
+    include_package_data=True,
+    install_requires=["django-notification==1.0",
+                      "django-voting==0.2",
+                     ],
     zip_safe=False,
     classifiers = [
         "Development Status :: 3 - Alpha",
